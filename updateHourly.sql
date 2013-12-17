@@ -2,11 +2,12 @@
 -- =============================================
 -- Author:		Miko Nukka
 -- Create date: 2013 detsember
--- Description:	Võrdleb mitme protsendivõrra kasvas B võrreldes A'ga
+-- Description:	Koondab valimi andmeid päevasesse valimisse tundide kaupa.
 -- =============================================
 CREATE FUNCTION HourlyUpdate() RETURNS VOID AS $$
+
 BEGIN
-INSERT INTO DailyData (data_id, name, Date_Time, Day, DayN, Hour, Average_buy, Average_sell, Previous_average_buy, Previous_average_sell, Sell_count, Buy_count)
+INSERT INTO "DailyData" (data_id, name, date_time, DayN, Hour, Average_buy, Average_sell, Previous_average_buy, Previous_average_sell, Buy_count, Sell_count)
 SELECT
 		MAX(prices.data_id) AS data_id,
 		MAX(items.name) AS name,
@@ -27,4 +28,5 @@ SELECT
 				date_part(HOUR, date)
 			WINDOW w AS (PARTITION BY prices.buy_price, prices.sell_price ORDER BY date_part(HOUR, date));
 END;
+
 $$ language plpgsql;
