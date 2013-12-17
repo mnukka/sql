@@ -4,14 +4,14 @@
 -- Create date: 2013 detsember
 -- Description:	Võrdleb mitme protsendivõrra kasvas B võrreldes A'ga
 -- =============================================
-CREATE FUNCTION PercentageIncrease(Nimetaja decimal, Lugeja decimal) RETURNS decimal AS $$
+CREATE FUNCTION PercentageIncrease(Lugeja decimal, Nimetaja decimal) RETURNS decimal AS $$
 DECLARE 
-	output decimal;
+	output decimal; --Error sellel real? why...
 BEGIN
-	IF Nimetaja = 0 OR Lugeja = 0 
-		THEN output := 0; 
+	IF Lugeja = 0 
+		THEN RETURN 0;
 	ELSE
-		output := ROUND((Nimetaja - Lugeja) / Lugeja * 100, 2);
+		output := ROUND((Lugeja - Nimetaja) / Nimetaja * 100, 2);
 	END IF;
 	RETURN output;
 END;
