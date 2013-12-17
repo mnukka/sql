@@ -6,7 +6,7 @@
 -- =============================================
 CREATE FUNCTION PercentageIncrease(Lugeja decimal, Nimetaja decimal) RETURNS DECIMAL AS $$
 BEGIN
-	IF Nimetaja = 0 
+	IF Nimetaja = NULL or Nimetaja = 0 
 		THEN RETURN 0;
 	ELSE
 		RETURN ROUND((Lugeja - Nimetaja) / Nimetaja * 100, 2);
