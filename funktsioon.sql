@@ -12,7 +12,7 @@ BEGIN
 		THEN output := 0; 
 	ELSE
 		output := ROUND((Nimetaja - Lugeja) / Lugeja * 100, 2);
-	END
+	END IF;
 	RETURN output;
 END;
 $$ language SQL;
