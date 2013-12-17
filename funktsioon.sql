@@ -8,7 +8,7 @@ CREATE FUNCTION PercentageIncrease(Lugeja decimal, Nimetaja decimal) RETURNS dec
 DECLARE 
 	output decimal; --Error sellel real? why...
 BEGIN
-	IF Lugeja = 0 
+	IF Nimetaja = 0 
 		THEN RETURN 0;
 	ELSE
 		output := ROUND((Lugeja - Nimetaja) / Nimetaja * 100, 2);
