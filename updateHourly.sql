@@ -16,6 +16,7 @@ SELECT
                 AVG(buy_count)
                         FROM "GuildWars2_prices" AS prices
                         GROUP BY
+								data_id,
                                 date_part('day', prices.date),
                                 date_part('hour', prices.date);
 $BODY$
