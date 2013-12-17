@@ -12,4 +12,4 @@ BEGIN
 		RETURN ROUND((Lugeja - Nimetaja) / Nimetaja * 100, 2);
 	END IF;
 END;
-$$ language SQL;
+$$ language plpgsql;;
