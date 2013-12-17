@@ -7,10 +7,10 @@
 CREATE FUNCTION HourlyUpdate() RETURNS VOID AS $$
 
 BEGIN
-INSERT INTO "DailyData" (data_id, name, date_time, DayN, Hour, Average_buy, Average_sell, Previous_average_buy, Previous_average_sell, Buy_count, Sell_count)
+INSERT INTO "DailyData" ("data_id", "name", "date_time", "dayn", "hour", "average_buy", "average_sell", "previous_average_buy", "previous_average_sell", "buy_count", "sell_count")
 SELECT
 		MAX(prices.data_id) AS data_id,
-		MAX(items.name) AS name,
+		MAX(prices.name) AS name,
 		MAX(date) as date,
 		DayN = date_part(DAY, date),
 		Hour = date_part(HOUR, date),
@@ -21,7 +21,7 @@ SELECT
 		LAG(CAST(	AVG(prices.sell_price) AS float4)) 	OVER w AS Last_sell,
 		AVG(Sell_count),
 		AVG(Buy_count)
-			FROM GuildWars2_prices AS prices --INNER JOIN GuildWars2_items  AS items ON prices.data_id = items.data_id
+			FROM "GuildWars2_prices" AS prices --INNER JOIN GuildWars2_items  AS items ON prices.data_id = items.data_id
 			GROUP BY
 				prices.data_id,
 				date_part(DAY, date),
